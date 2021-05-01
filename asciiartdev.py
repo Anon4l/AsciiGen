@@ -8,6 +8,10 @@ from skimage.color import rgb2gray
 from skimage.transform import rescale, resize, downscale_local_mean
 def loadphoto():
 	photo = io.imread(fname=sys.argv[1])
+	
+	#photo = rescale(photo,0.3,multichannel=True,preserve_range=True)
+	photo = resize(photo,(int(sys.argv[3]),int(sys.argv[4])),preserve_range=True,anti_aliasing=True)
+	#print(photo)
 	r = 0
 	g = 1
 	b = 2
@@ -40,7 +44,7 @@ def brightness(i) :
 			"0.9" : brightness[9],
 			"1.0"   : brightness[9]                      
 			}
-	return switch.get(i)
+	return switch.get(i,i)
 def art(art,limiter): 
 	conta = 0
 	render = []
@@ -50,6 +54,7 @@ def art(art,limiter):
 		print(render[i], end = "")
 		if(conta == limiter):
 			conta = 0
+			print("\n")
 print("\n")
 def write(art,limiter):
 	randomize = str(random.randint(1,60000))
